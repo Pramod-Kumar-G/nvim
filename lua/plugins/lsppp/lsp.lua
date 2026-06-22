@@ -1,0 +1,119 @@
+return {
+--   -- Mason: Installs language servers
+--   {
+--     "mason-org/mason.nvim",
+--     config = function()
+--       require("mason").setup({
+--         ui = {
+--           border = "rounded", -- Nice UI borders
+--           icons = {
+--             package_installed = "✓",
+--             package_pending = "➜",
+--             package_uninstalled = "✗",
+--           },
+--         },
+--       })
+--     end,
+--   },
+--
+--   -- Mason-LSPconfig: Bridges Mason and nvim-lspconfig
+--   {
+--     "mason-org/mason-lspconfig.nvim",
+--     dependencies = {
+--       "mason-org/mason.nvim",
+--       "neovim/nvim-lspconfig",
+--     },
+--     config = function()
+--       require("mason-lspconfig").setup({
+--         -- List of servers to install automatically
+--         ensure_installed = { "pyright",  "lua_ls" },
+--         automatic_installation = true, -- Install missing servers
+--       })
+--
+--       -- Setup each server
+--       require("mason-lspconfig").setup_handlers({
+--         function(server_name) -- Default handler for all servers
+--           require("lspconfig")[server_name].setup({
+--             capabilities = vim.tbl_deep_extend(
+--               "force",
+--               vim.lsp.protocol.make_client_capabilities(),
+--               require("cmp_nvim_lsp").default_capabilities()
+--             ),
+--             on_attach = function(client, bufnr)
+--               -- Keymaps for LSP features
+--               local bufopts = { noremap = true, silent = true, buffer = bufnr }
+--               vim.keymap.set("n", "gd", vim.lsp.buf.definition, bufopts) -- Go to definition
+--               vim.keymap.set("n", "K", vim.lsp.buf.hover, bufopts) -- Show hover info
+--               vim.keymap.set("n", "gr", vim.lsp.buf.references, bufopts) -- Find references
+--               vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, bufopts) -- Code actions
+--               vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, bufopts) -- Rename symbol
+--             end,
+--           })
+--         end,
+--         -- Custom settings for lua_ls (Lua server)
+--         ["lua_ls"] = function()
+--           require("lspconfig").lua_ls.setup({
+--             settings = {
+--               Lua = {
+--                 diagnostics = {
+--                   globals = { "vim" }, -- Recognize 'vim' global for Neovim configs
+--                 },
+--                 workspace = {
+--                   library = vim.api.nvim_get_runtime_file("", true), -- Better Lua support
+--                   checkThirdParty = false,
+--                 },
+--               },
+--             },
+--           })
+--         end,
+--       })
+--     end,
+--   },
+--
+--   -- LSP Config: Pre-made LSP settings
+--   {
+--     "neovim/nvim-lspconfig",
+--   },
+--   -- Autocompletion: nvim-cmp
+--   {
+--     "hrsh7th/nvim-cmp",
+--     dependencies = {
+--       "hrsh7th/cmp-nvim-lsp", -- LSP completion source
+--       "hrsh7th/cmp-buffer", -- Buffer completion
+--       "hrsh7th/cmp-path", -- File path completion
+--       "L3MON4D3/LuaSnip", -- Snippet engine
+--       "saadparwaiz1/cmp_luasnip", -- Snippet completion
+--     },
+--     config = function()
+--       local cmp = require("cmp")
+--       cmp.setup({
+--         snippet = {
+--           expand = function(args)
+--             require("luasnip").lsp_expand(args.body) -- Snippet expansion
+--           end,
+--         },
+--         mapping = cmp.mapping.preset.insert({
+--           ["<C-Space>"] = cmp.mapping.complete(), -- Trigger completion
+--           ["<CR>"] = cmp.mapping.confirm({ select = true }), -- Confirm selection
+--           ["<Tab>"] = cmp.mapping.select_next_item(), -- Next item
+--           ["<S-Tab>"] = cmp.mapping.select_prev_item(), -- Previous item
+--         }),
+--         sources = {
+--           { name = "nvim_lsp" }, -- LSP suggestions
+--           { name = "luasnip" }, -- Snippet suggestions
+--           { name = "buffer" }, -- Words from buffer
+--           { name = "path" }, -- File paths
+--         },
+--       })
+--     end,
+--   },
+--
+--   -- Snippets: LuaSnip
+--   {
+--     "L3MON4D3/LuaSnip",
+--     dependencies = { "rafamadriz/friendly-snippets" },
+--     config = function()
+--       require("luasnip.loaders.from_vscode").lazy_load() -- Load VS Code-style snippets
+--     end,
+--   },
+}  
